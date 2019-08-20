@@ -1,0 +1,185 @@
+Git cheat sheet
+
+setup
+git help - will provide instructions 
+
+git config —global user.name “David Conner” - set the global user name
+
+git config —global user.email rdconner@us.ibm.com - set the global email
+
+git config —global color.ui true - turns on a colorful ui for the command line
+
+
+Start a new repository
+
+mkdir directory_name - will make a folder called directory name
+
+cd directory_name - will step into the folder  called directory_name
+
+git init - initiate a local git repository in the current folder
+
+git remote add origin https://github.com/try-git/try_git.git - add remote repository named origin at this address
+
+git remote rm <name> - will remove a remote repository of whatever name is applied
+
+git remote -v - finds out what remote repositories our local repository knows about
+
+
+Git Work Flow
+
+git status -  will tell you the current state of the repo
+
+git log - will show a log of all the commits made in this branch
+
+git add . - will add all altered files to staging
+
+git add textName.html - will add the file textName.html to the project
+
+git add *.txt -  will add all files in current directory
+
+git add ‘*.txt’ - will add all files ending with.txt in entire project
+
+git add —all - will add all new, modified or deleted files
+
+git commit -m “note about commit” -  will commit changes and add a note
+
+git push -u origin master - push changes up to remote repository. u tells git to remember so next time you can type git push
+
+git pull origin master - pulls in all changes made to remote repository
+
+git commit -a -m “modification note” -  will add all tracked files and commit them with commit message
+
+
+
+See Differences in files and Undo Changes
+
+git diff - see what is different since last commit
+
+git diff —staged - can see the changes you have staged 
+
+git reset textName.html -  unstages the file textName.html
+
+git reset HEAD textName.html - unstages the file textName.html
+
+git checkout — textName.html - gets rid of all changes since the last commit for textName.html
+
+
+
+Creating Branches from Master
+
+git branch branch_name - creates a branch called branch_name of the master branch
+
+git branch - will show the branches available. will show both the master and the branch_name branches
+
+git branch -r -  list all remote branches
+
+git checkout branch_name -  will switch over to this new branch
+
+git rm ‘*.txt’ - will remove all .txt files and stage the removal of the files
+
+git commit -m “changes to new branch” - stage and commit changes to branch
+
+git checkout -b newBranch - creates and switches to new branch (checks out) called newBranch
+
+git push origin newBranch - creates a remote version of our branch and attaches it to the origin branch
+
+git remote show origin - shows remote branches and whether tracked or not. Shows local branches. Shows local refs configured for 'git push’
+
+git branch -m new-name  - rename your local branch if you are on the branch
+
+git branch -m old-name new-name - the same as above if not on branch you want to modify
+
+git push origin :old-name new-name - delete the old-name remote branch and push the new-name local branch
+
+
+
+
+Merge Branch Back To Master
+
+git checkout master - checkout master branch so you can switch over and merge your new changes
+
+git merge branch_name - will merge the changes made to the new branch into the master
+
+git branch -d branch_name - will delete the branch named branch_name. clean up after merged with master
+
+
+Git ingore
+
+git rm -r —cached . - removes all files from cache for when you already have pushed files to the repo that should be on gitignore page.
+
+
+
+Deleting a Branch
+
+git push origin :newBranch - deletes remote branch called newBranch
+
+git branch -d branch_name - will delete the branch named branch_name locally
+
+git branch -D branch_name - capital D will delete branch even if there are unmerged changes
+
+git remote prune origin -  will remove all stale references to branches that were deleted
+ 
+
+
+
+Undoing or Changing a Commit
+
+git reset —soft HEAD^ - will undo last commit and reset all files into staging. Carrot symbol means to move to commit just before current “HEAD” 
+
+git add missingFile.txt - add file you want to add to last commit to stage
+
+git commit —amend -m “Commit message” - Amends the last commit with the new file and overwrites old commit message
+
+git reset —hard HEAD^ - undo last commit and all changes
+
+git reset —hard HEAD^^ - undo last two commits and all changes
+
+
+Updating a Branch
+git pull --rebase upstream master
+
+
+
+
+
+Cloning a Repository
+
+git clone https://github.com/codeschool/git-real.git - will create a local repository with that directory
+
+
+
+Undo a commit and redo
+$ git commit -m "Something terribly misguided"              (1)
+$ git reset --soft HEAD~                                    (2)
+<< edit files as necessary >>                               (3)
+$ git add ...                                               (4)
+$ git commit -c ORIG_HEAD                                   (5)
+1. This is what you want to undo 
+2. This is most often done when you remembered what you just committed is incomplete, or you misspelled your commit message1, or both. Leaves working tree as it was before git commit. 
+3. Make corrections to working tree files. 
+4. git add whatever changes you want to include in your new commit. 
+5. Commit the changes, reusing the old commit message. reset copied the old head to .git/ORIG_HEAD; commit with -c ORIG_HEAD will open an editor, which initially contains the log message from the old commit and allows you to edit it. If you do not need to edit the message, you could use the -C option instead.   zacks way: 
+6. after you merge from master, do git reset --soft master 		7.	 
+7. that puts you back at master with all of your changes as 'unstaged' 		9.	2:48:03 PM
+8. then you just do git commit -am "coherent commit message" 		11.	2:48:16 PM
+9. git push --force [your branch name] 		13.	2:48:26 PM
+
+
+
+Vi Commands
+
+j - down
+
+h - left 
+
+k - up
+
+l - right
+
+esc - leave mode
+
+i - insert mode 
+
+:wq - save and quite
+
+:q! - cancel and quite
